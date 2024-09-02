@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Real-Time Event Map</title>
+    <!-- Incluindo Leaflet CSS -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header>
+        <h1>Mapa de Eventos ao Vivo</h1>
+    </header>
+    <div id="map"></div>
+    <div id="timeline"></div>
+
+    <!-- Incluindo Leaflet JS -->
+    <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+    <!-- Incluindo Timeline.js -->
+    <script src="https://cdn.knightlab.com/libs/timeline3/latest/js/timeline.js"></script>
+    <script src="app.js"></script>
+</body>
+</html>
+<header>
+    <h1>Mapa de Eventos ao Vivo</h1>
+    <nav>
+        <button id="menu-toggle" aria-label="Open Menu">☰</button>
+        <ul id="nav-menu">
+            <li><a href="#map">Mapa</a></li>
+            <li><a href="#timeline">Cronograma</a></li>
+            <li><a href="#about">Sobre</a></li>
+            <li><a href="#contact">Contato</a></li>
+        </ul>
+    </nav>
+</header>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Live Event Map</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header>
+        <h1>Live Event Map</h1>
+        <div class="filter">
+            <label for="event-type">Filter by Event Type:</label>
+            <select id="event-type" onchange="filterEvents()">
+                <option value="all">All</option>
+                <option value="music">Music</option>
+                <option value="sports">Sports</option>
+                <option value="conference">Conference</option>
+            </select>
+        </div>
+    </header>
+    <div id="map"></div>
+    <script src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY"></script>
+    <script src="scripts.js"></script>
+</body>
+</html>
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Evento ao Vivo</title>
+    <style>
+        #countdown {
+            font-size: 2em;
+            margin-top: 20px;
+        }
+        #live-now {
+            display: none;
+            color: red;
+            font-size: 2em;
+        }
+    </style>
+</head>
+<body>
+    <h1>Meu Evento ao Vivo</h1>
+    <div id="countdown"></div>
+    <div id="live-now">O evento está ao vivo agora!</div>
+
+    <script>
+        // Data do evento
+        const eventDate = new Date("Aug 31, 2024 19:00:00").getTime();
+
+        // Atualiza a contagem regressiva a cada segundo
+        const countdownInterval = setInterval(function() {
+            const now = new Date().getTime();
+            const timeLeft = eventDate - now;
+
+            const days = Math.floor(timeLeft / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((timeLeft % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((timeLeft % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((timeLeft % (1000 * 60)) / 1000);
+
+            document.getElementById("countdown").innerHTML = 
+                days + "d " + hours + "h " + minutes + "m " + seconds + "s ";
+
+            if (timeLeft < 0) {
+                clearInterval(countdownInterval);
+                document.getElementById("countdown").style.display = "none";
+                document.getElementById("live-now").style.display = "block";
+            }
+        }, 1000);
+    </script>
+</body>
+</html>
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chat ao Vivo</title>
+    <style>
+        #chat-box {
+            border: 1px solid #ccc;
+            width: 100%;
+            height: 300px;
+            overflow-y: scroll;
+            margin-bottom: 10px;
+            padding: 10px;
+        }
+        #message {
+            width: 80%;
+        }
+    </style>
+</head>
+<body>
+    <h1>Chat ao Vivo</h1>
+    <div id="chat-box"></div>
+    <input type="text" id="message" placeholder="Digite sua mensagem">
+    <button id="send-btn">Enviar</button>
+
+    <script>
+        const chatBox = document.getElementById("chat-box");
+        const messageInput = document.getElementById("message");
+        const sendBtn = document.getElementById("send-btn");
+
+        sendBtn.addEventListener("click", function() {
+            const message = messageInput.value.trim();
+            if (message) {
+                const messageElement = document.createElement("p");
+                messageElement.textContent = "Você: " + message;
+                chatBox.appendChild(messageElement);
+                chatBox.scrollTop = chatBox.scrollHeight; // Rolagem automática para o final
+                messageInput.value = ""; // Limpa o campo de entrada
+            }
+        });
+    </script>
+</body>
+</html>
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Evento ao Vivo</title>
+    <!-- Link para o arquivo CSS -->
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- Banner do Evento -->
+    <div id="banner">
+        <img src="banner.jpg" alt="Banner do Evento">
+    </div>
+
+    <!-- Contagem Regressiva -->
+    <h1><img src="timer-icon.png" alt="Ícone de Temporizador" class="icon"> Meu Evento ao Vivo</h1>
+    <div id="countdown"></div>
+    <div id="live-now">O evento está ao vivo agora!</div>
+    
+    <!-- Chat ao Vivo -->
+    <h1><img src="chat-icon.png" alt="Ícone de Chat" class="icon"> Chat ao Vivo</h1>
+    <div id="chat-box"></div>
+    <input type="text" id="message" placeholder="Digite sua mensagem">
+    <button id="send-btn">Enviar</button>
+
+    <!-- Referência aos arquivos .js -->
+    <script src="countdown.js"></script>
+    <script src="chat.js"></script>
+</body>
+</html>
+<img src="clima.JFIF" alt="Bannerrr">
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mapa de Eventos ao Vivo</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header>
+        <h1>Mapa de Eventos ao Vivo</h1>
+    </header>
+    <main>
+        <section class="event">
+            <h2>Eventos</h2>
+            <ul id="event-list">
+                <li>14 de Agosto - Show ABC</li>
+                <li>15 de Agosto - Bem-vindo</li>
+                <li>21 de Agosto - Timelir024</li>
+            </ul>
+        </section>
+        <section class="search">
+            <input type="text" placeholder="Digite aqui para pesquisar" />
+        </section>
+    </main>
+    <footer>
+        <p>Contato: secretaria@educacao.gov.br</p>
+    </footer>
+</body>
+</html>
